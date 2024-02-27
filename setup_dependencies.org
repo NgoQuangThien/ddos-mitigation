@@ -20,6 +20,8 @@ sudo ln -sf /usr/include/asm-generic/ /usr/include/asm
 #+end_example
 
 * Go compiler version supported by ebpf-go's Go module
+#+begin_example
 wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
+#+end_example
