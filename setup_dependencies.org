@@ -17,5 +17,6 @@ sudo apt install libbpf-dev
 #+end_example
 
 * Linux kernel headers 3
+sudo ln -sf /usr/include/asm-generic/ /usr/include/asm
 
 * Go compiler version supported by ebpf-go's Go module
