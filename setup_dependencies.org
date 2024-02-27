@@ -7,6 +7,9 @@ InstalledDir: /usr/bin
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
 sudo ./llvm.sh <version number>
+
+sudo ln -s /usr/bin/clang-18 /usr/local/bin/clang
+sudo ln -s /usr/bin/llvm-strip-18 /usr/local/bin/llvm-strip
 #+end_example
 
 * libbpf headers 
