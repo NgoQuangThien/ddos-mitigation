@@ -3,6 +3,9 @@
 #include "vmlinux.h"
 #include "bpf_endian.h"
 #include "bpf_helpers.h"
+#include <bpf/bpf_helpers.h>
+
+#include "if_ether.h"
 
 
 char __license[] SEC("license") = "Dual MIT/GPL";
@@ -31,7 +34,7 @@ static __always_inline int parse_ip_src_addr(struct xdp_md *ctx, __u32 *ip_src_a
 		return 0;
 	}
 
-	if (eth->h_proto != bpf_htons(0x0800)) {
+	if (eth->h_proto != bpf_htons(ETH_P_IP)) {
 		// The protocol is not IPv4, so we can't parse an IPv4 source address.
 		return 0;
 	}
@@ -68,5 +71,5 @@ int xdp_prog_func(struct xdp_md *ctx) {
 
 done:
 	// Try changing this to XDP_DROP and see what happens!
-	return XDP_PASS;
+	return XDP_DROP;
 }
