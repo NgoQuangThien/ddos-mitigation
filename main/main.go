@@ -19,11 +19,17 @@ import (
 
 	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/link"
+	"github.com/cilium/ebpf/rlimit"
 )
 
 //go:generate go run github.com/cilium/ebpf/cmd/bpf2go bpf xdp.c -- -I../headers
 
 func main() {
+	// Remove resource limits for kernels <5.11.
+	if err := rlimit.RemoveMemlock(); err != nil {
+		log.Fatal("Removing memlock:", err)
+	}
+
 	if len(os.Args) < 2 {
 		log.Fatalf("Please specify a network interface")
 	}
