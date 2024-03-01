@@ -1,16 +1,13 @@
 //go:build ignore
 
-#include "vmlinux.h"
-#include "bpf_endian.h"
-#include "bpf_helpers.h"
-#include <bpf/bpf_helpers.h>
-
-#include "ethernet_hdr.h"
+#include "../headers/vmlinux.h"
+#include "../headers/bpf_endian.h"
+#include "../headers/bpf_helpers.h"
 
 
 char __license[] SEC("license") = "Dual MIT/GPL";
 
-#define MAX_MAP_ENTRIES 1000000
+#define MAX_MAP_ENTRIES 16
 
 /* Define an LRU hash map for storing packet count by source IPv4 address */
 struct {
@@ -71,5 +68,5 @@ int xdp_prog_func(struct xdp_md *ctx) {
 
 done:
 	// Try changing this to XDP_DROP and see what happens!
-	return XDP_DROP;
+	return XDP_PASS;
 }
