@@ -4,18 +4,14 @@
 #include "../headers/bpf_endian.h"
 #include "../headers/bpf_helpers.h"
 
+#include "data_structures/map.h"
 
-char __license[] SEC("license") = "Dual MIT/GPL";
+#include "packets_define/ethernet.h"
+#include "packets_define/ip.h"
+#include "packets_define/tcp.h"
+#include "packets_define/udp.h"
+#include "packets_define/icmp.h"
 
-#define MAX_MAP_ENTRIES 16
-
-/* Define an LRU hash map for storing packet count by source IPv4 address */
-struct {
-	__uint(type, BPF_MAP_TYPE_LRU_HASH);
-	__uint(max_entries, MAX_MAP_ENTRIES);
-	__type(key, __u32); // source IPv4 address
-	__type(value, __u32); // packet count
-} xdp_stats_map SEC(".maps");
 
 /*
 Attempt to parse the IPv4 source address from the packet.
@@ -70,3 +66,5 @@ done:
 	// Try changing this to XDP_DROP and see what happens!
 	return XDP_PASS;
 }
+
+char __license[] SEC("license") = "Dual MIT/GPL";
