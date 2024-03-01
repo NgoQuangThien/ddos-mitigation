@@ -3,6 +3,8 @@
         "bpf.h": "c",
         "bpf_common.h": "c",
         "bpf_helpers.h": "c",
-        "ethernet_hdr.h": "c"
+        "ethernet_hdr.h": "c",
+        "ethernet.h": "c",
+        "icmp.h": "c"
     }
 }

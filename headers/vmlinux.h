@@ -63682,16 +63682,8 @@ struct iphdr {
 	__u8 ttl;
 	__u8 protocol;
 	__sum16 check;
-	union {
-		struct {
-			__be32 saddr;
-			__be32 daddr;
-		};
-		struct {
-			__be32 saddr;
-			__be32 daddr;
-		} addrs;
-	};
+	__be32 saddr;
+	__be32 daddr;
 };
 
 struct ipv6_rt_hdr {
