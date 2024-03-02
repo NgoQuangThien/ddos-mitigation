@@ -6,15 +6,17 @@ Ubuntu clang version 18.1.0 (++20240221023121+bba39443eb91-1~exp1~20240221023233
 Target: x86_64-pc-linux-gnu
 Thread model: posix
 InstalledDir: /usr/bin
+
 ```
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
 sudo ./llvm.sh <version number>
 ```
 
+```
 sudo ln -s /usr/bin/clang-18 /usr/local/bin/clang
 sudo ln -s /usr/bin/llvm-strip-18 /usr/local/bin/llvm-strip
-#+end_example
+```
 
 ## libbpf headers 
 ```
