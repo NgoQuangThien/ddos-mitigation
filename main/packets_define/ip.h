@@ -1,3 +1,6 @@
+#ifndef _LINUX_IP_H
+#define _LINUX_IP_H
+
 #define IPTOS_TOS_MASK		0x1E
 #define IPTOS_TOS(tos)		((tos)&IPTOS_TOS_MASK)
 #define	IPTOS_LOWDELAY		0x10
@@ -60,3 +63,5 @@
 #define	IPOPT_TS_PRESPEC	3		/* specified modules only */
 
 #define IPV4_BEET_PHMAXLEN 8
+
+#endif /* _LINUX_IP_H */

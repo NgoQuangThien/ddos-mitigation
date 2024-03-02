@@ -1,3 +1,6 @@
+#ifndef _LINUX_TCP_H
+#define _LINUX_TCP_H
+
 /*
  * TCP general constants
  */
@@ -65,3 +68,5 @@
 /* tcp_md5sig extension flags for TCP_MD5SIG_EXT */
 #define TCP_MD5SIG_FLAG_PREFIX		0x1	/* address prefix length */
 #define TCP_MD5SIG_FLAG_IFINDEX		0x2	/* ifindex set */
+
+#endif /* _LINUX_TCP_H */

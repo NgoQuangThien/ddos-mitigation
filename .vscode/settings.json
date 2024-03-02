@@ -5,6 +5,10 @@
         "bpf_helpers.h": "c",
         "ethernet_hdr.h": "c",
         "ethernet.h": "c",
-        "icmp.h": "c"
+        "icmp.h": "c",
+        "vmlinux.h": "c",
+        "bpf_endian.h": "c",
+        "tcp.h": "c",
+        "struct.h": "c"
     }
 }

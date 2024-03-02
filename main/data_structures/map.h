@@ -1,3 +1,6 @@
+#ifndef __MAP_DEFINE_H
+#define __MAP_DEFINE_H
+
 #include "../../headers/vmlinux.h"
 #include "../../headers/bpf_helpers.h"
 
@@ -11,3 +14,5 @@ struct {
 	__type(key, __u32); // source IPv4 address
 	__type(value, __u32); // packet count
 } xdp_stats_map SEC(".maps");
+
+#endif /* __MAP_DEFINE_H */

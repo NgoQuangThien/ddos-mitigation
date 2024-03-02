@@ -1,3 +1,6 @@
+#ifndef _LINUX_IF_ETHER_H
+#define _LINUX_IF_ETHER_H
+
 /*
  *	IEEE 802.3 Ethernet magic constants.  The frame sizes omit the preamble
  *	and FCS/CRC (frame check sequence).
@@ -128,3 +131,5 @@
 #define ETH_P_MCTP	0x00FA		/* Management component transport
 					 * protocol packets
 					 */
+
+#endif /* _LINUX_IF_ETHER_H */

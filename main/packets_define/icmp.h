@@ -1,3 +1,6 @@
+#ifndef _LINUX_ICMP_H
+#define _LINUX_ICMP_H
+
 #define ICMP_ECHOREPLY		0	/* Echo Reply			*/
 #define ICMP_DEST_UNREACH	3	/* Destination Unreachable	*/
 #define ICMP_SOURCE_QUENCH	4	/* Source Quench		*/
@@ -62,3 +65,5 @@
 #define ICMP_AFI_IP6			2	/* Address Family Identifier for ipv6 */
 
 #define ICMP_FILTER			1
+
+#endif /* _LINUX_ICMP_H */
