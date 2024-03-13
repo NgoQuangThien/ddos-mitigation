@@ -113,9 +113,81 @@ static __always_inline int parse_iphdr(struct hdr_cursor *nh,
 }
 
 
-static __always_inline int parse_ip_src_addr(struct iphdr *iphdr, __u32 *ip_src_addr) {
-	*ip_src_addr = (__u32)(iphdr->addrs.saddr);
+/*
+ * parse_tcphdr: parse and return the length of the tcp header
+ */
+static __always_inline int parse_tcphdr(struct hdr_cursor *nh,
+					void *data_end,
+					struct tcphdr **tcphdr)
+{
+	int len;
+	struct tcphdr *h = nh->pos;
 
-	return 1;
+	if ((void *)(h + 1) > data_end)
+		return -1;
+
+	len = h->doff * 4;
+	/* Sanity check packet field is valid */
+	if(len < sizeof(*h))
+		return -1;
+
+	/* Variable-length TCP header, need to use byte-based arithmetic */
+	if (nh->pos + len > data_end)
+		return -1;
+
+	nh->pos += len;
+	*tcphdr = h;
+
+	return len;
 }
+
+
+/*
+ * parse_udphdr: parse the udp header and return the length of the udp payload
+ */
+static __always_inline int parse_udphdr(struct hdr_cursor *nh,
+					void *data_end,
+					struct udphdr **udphdr)
+{
+	int len;
+	struct udphdr *h = nh->pos;
+
+	if ((void *)(h + 1) > data_end)
+		return -1;
+
+	nh->pos  = h + 1;
+	*udphdr = h;
+
+	len = bpf_ntohs(h->len) - sizeof(struct udphdr);
+	if (len < 0)
+		return -1;
+
+	return len;
+}
+
+
+static __always_inline int parse_icmphdr(struct hdr_cursor *nh,
+					 void *data_end,
+					 struct icmphdr **icmphdr)
+{
+	struct icmphdr *icmph = nh->pos;
+
+	if ((void *)(icmph + 1) > data_end)
+		return -1;
+
+	nh->pos  = icmph + 1;
+	*icmphdr = icmph;
+
+	return icmph->type;
+}
+
+
+// static __always_inline int parse_ip_src_addr(struct iphdr *iph, __u32 *ip_src_addr, void *data_end) {
+// 	if ((void *)(iph + 1) > data_end) {
+// 		return 0;
+// 	}
+
+// 	*ip_src_addr = (__u32)(iph->addrs.saddr);
+// 	return 1;
+// }
 #endif /* __PARSING_HEADER_H */
